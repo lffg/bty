@@ -123,10 +123,7 @@ impl<Tag, Raw: Default> Default for Brand<Tag, Raw> {
     }
 }
 
-impl<Tag, Raw: PartialEq> PartialEq for Brand<Tag, Raw>
-where
-    Raw: PartialEq,
-{
+impl<Tag, Raw: PartialEq> PartialEq for Brand<Tag, Raw> {
     fn eq(&self, other: &Self) -> bool {
         self.raw == other.raw
     }

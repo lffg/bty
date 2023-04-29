@@ -39,21 +39,21 @@ macro_rules! brand {
     (
         $(
             $(#[$attr:meta])*
-            $vis:vis type $name:ident = $ty:ty ;
+            $vis:vis type $tag:ident = $raw:ty ;
         )+
     ) => {
         $crate::paste::paste! {
             $(
                 #[derive(Copy, Clone)]
                 #[doc(hidden)]
-                $vis struct [< Branded $name Tag >];
+                $vis struct [< Branded $tag Tag >];
 
-                impl $crate::Tag for [< Branded $name Tag >] {
-                    const TAG_NAME: &'static str = stringify!($name);
+                impl $crate::Tag for [< Branded $tag Tag >] {
+                    const TAG_NAME: &'static str = stringify!($tag);
                 }
 
                 $(#[$attr])*
-                $vis type $name = $crate::Brand<[< Branded $name Tag >], $ty>;
+                $vis type $tag = $crate::Brand<[< Branded $tag Tag >], $raw>;
             )+
         }
     };
@@ -113,7 +113,7 @@ where
     Raw: fmt::Debug,
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{}({:?})", Tag::TAG_NAME, self.raw)
+        f.debug_tuple(Tag::TAG_NAME).field(&self.raw).finish()
     }
 }
 

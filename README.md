@@ -33,6 +33,12 @@ implementations, such as the `serde` one or the `sqlx` one. Manually
 instantiation, though unrecommended, can be done using the `unchecked_from_raw`
 associated function.
 
+See [this thread][tw-ts] from Matt Pocock on Twitter for a more exemplified and
+intuitive view. Though it shows examples in TypeScript, the principles remain
+the same.
+
+[tw-ts]: https://twitter.com/mattpocockuk/status/1625173884885401600
+
 ## Rationale
 
 It's not rare to have values that, although of the same type, belong to
